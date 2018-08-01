@@ -1,0 +1,18 @@
+close all
+clear all
+clc
+
+
+faceDetector1 = vision.CascadeObjectDetector('ProfileFace');
+tic
+I = imread('image_0015.jpg');
+figure, imsow(I)
+I_g = rgb2gray(I);
+figure, imshow(I_g)
+re = imresize(I_g, [100 100]);
+figure, imshow(re)
+
+bboxes1 = step(faceDetector1, re);
+IFaces1 = insertObjectAnnotation(re, 'rectangle', bboxes1, 'Face');
+figure, imshow(IFaces1), title('Detected faces');
+toc
